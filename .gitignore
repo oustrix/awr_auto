@@ -1,0 +1,15 @@
+*.emp
+*.vin
+DATA_SETS/
+TEMP/
+.venv/
+
+.idea/
+
+.env
+
+*__pycache__*
+
+output.txt
+
+*.png
