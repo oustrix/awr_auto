@@ -6,3 +6,6 @@ deps:
 
 freeze:
 	pip freeze > requirements.txt
+
+lint:
+	black .
