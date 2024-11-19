@@ -1,6 +1,9 @@
 import os
 import codecs
 
+import glob
+
+
 
 def create_file(directory: str, file_name: str, content: str = '') -> str:
     """
@@ -28,3 +31,7 @@ def create_directory(path: str) -> str:
         os.makedirs(path)
 
     return path
+
+def get_emp_files_in_directory(directory_path: str) -> List[str]:
+    emp_files = glob.glob(os.path.join(directory_path, '*.emp'))
+    return emp_files

@@ -1,9 +1,7 @@
-import glob
 import os
 import os.path
 import time
 
-from numpy.f2py.auxfuncs import throw_error
 from pyawr_utils import awrde_utils
 from typing import List
 import pywinauto
@@ -12,14 +10,9 @@ import pywinauto.mouse as mouse
 from PIL import Image
 from pywinauto.keyboard import send_keys
 
-from .files import add_content_to_file, create_directory, create_file
+from .files import add_content_to_file, create_directory, create_file, get_emp_files_in_directory
 from .settings import settings
 from .tags import create_tags
-
-
-def get_emp_files_in_direcoty(directory_path: str) -> List[str]:
-    emp_files = glob.glob(os.path.join(directory_path, '*.emp'))
-    return emp_files
 
 
 class App:
@@ -36,7 +29,7 @@ class App:
         time.sleep(5)
 
 
-        files = get_emp_files_in_direcoty(settings.input_directory_path)
+        files = get_emp_files_in_directory(settings.input_directory_path)
 
         self.process_files(files)
 
