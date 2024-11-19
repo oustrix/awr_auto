@@ -26,7 +26,9 @@ class App:
     def __init__(self):
         self.awrde: awrde_utils.Project = awrde_utils.Project(awrde=awrde_utils.establish_link())
         self.is_first_run: bool = True
+        self.is_first_graph_opened: bool = False
         self.app_window: pywinauto.WindowSpecification = None
+        self.current_file_window = None
         self.output_dir = settings.output_directory_path
 
 
@@ -51,6 +53,8 @@ class App:
             self.app_window = pywinauto.Application(backend='uia').connect(title_re='.*.emp')
             self.is_first_run = False
 
+        self.current_file_window = self.app_window.window(title_re='.*.emp', control_type="Window")
+
         file_name = os.path.basename(file)[:-4]
 
         self.create_md_file(file_name)
@@ -64,7 +68,7 @@ class App:
         self.awrde.simulate_analyze()
 
     def open_graphs_tree(self):
-        graphs = self.app_window.window(title_re='.*.emp', control_type="Window").child_window(title='Graphs')
+        graphs = self.current_file_window.child_window(title='Graphs')
         if len(graphs.sub_elements()) == 0:
             coords = graphs.rectangle().mid_point()
             mouse.double_click(coords=(coords.x, coords.y))
@@ -86,22 +90,23 @@ class App:
 
 
     def open_graph(self, name: str):
-        coords = self.app_window.window(title_re='.*.emp', control_type="Window").window(title='Graphs').window(title=name).rectangle().mid_point()
+        coords = self.current_file_window.window(title='Graphs').window(title=name).rectangle().mid_point()
         mouse.double_click(coords=(coords.x, coords.y))
 
-        print(name)
+        if not self.is_first_graph_opened:
+            try:
+                self.app_window.window(title_re='.*.emp', control_type="Window").window(title=name, control_type="Window").child_window(title="Развернуть", control_type="Button").click()
+            except pywinauto.findwindows.ElementNotFoundError:
+                pass
+            except Exception as e:
+                print(e)
 
-        try:
-            self.app_window.window(title_re='.*.emp', control_type="Window").window(title=name, control_type="Window").child_window(title="Развернуть", control_type="Button").click()
-        except pywinauto.findwindows.ElementNotFoundError:
-            pass
-        except Exception as e:
-            print(e)
+        self.is_first_graph_opened = True
 
     def screenshot_graph(self, name: str) -> Image:
         send_keys('{HOME}')
 
-        graph = self.app_window.window(title_re='.*.emp', control_type="Window").window(title=name, control_type="Window").child_window(title="GraphView", control_type="Pane")
+        graph = self.current_file_window.window(title=name, control_type="Window").child_window(title="GraphView", control_type="Pane")
         return graph.capture_as_image()
 
 
