@@ -2,6 +2,7 @@ import os
 import codecs
 
 import glob
+from typing import List
 
 
 def create_file(directory: str, file_name: str, content: str = "") -> str:
