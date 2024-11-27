@@ -22,5 +22,3 @@ class Hash:
 
     def add_last_to_file(self, file_path: str):
         add_content_to_file(file_path, self.hashes[-1] + "\n")
-
-

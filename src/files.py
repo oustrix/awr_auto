@@ -20,9 +20,11 @@ def read_file(file_path: str) -> str:
     with codecs.open(file_path, "r", "utf-8") as file:
         return file.read()
 
+
 def add_content_to_file(file_path: str, content: str):
     with codecs.open(file_path, "a", "utf-8") as file:
         file.write(content)
+
 
 def create_directory(path: str) -> str:
     if not os.path.exists(path):

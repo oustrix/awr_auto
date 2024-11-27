@@ -8,12 +8,19 @@ from pyawr_utils import awrde_utils
 from pywinauto import mouse
 from pywinauto.keyboard import send_keys
 
-from src.files import get_emp_files_in_directory, create_directory, create_file, add_content_to_file, read_file
+from src.files import (
+    get_emp_files_in_directory,
+    create_directory,
+    create_file,
+    add_content_to_file,
+    read_file,
+)
 from src.hashes import Hash
 from src.settings import settings
 from src.tags import create_tags
 
 import hashlib
+
 
 class Awrde:
     def __init__(self):
