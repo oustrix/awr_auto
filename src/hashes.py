@@ -1,24 +1,28 @@
 from typing import List
 
-from src.files import create_file, read_file, add_content_to_file
+from src.files import read_file, add_content_to_file, overwrite_file
 
 
 class Hash:
     def __init__(self):
-        self.hashes = []
+        self.hashes = {}
 
     def contains(self, hash_s: str) -> bool:
-        return hash_s in self.hashes
+        if hash_s in self.hashes:
+            self.hashes[hash_s] = True
+
+        return self.hashes[hash_s]
 
     def add(self, hash_s: str):
-        self.hashes.append(hash_s)
+        if not self.contains(hash_s):
+            self.hashes[hash_s] = True
 
     def read_from_file(self, file_path: str):
         content = read_file(file_path)
-        self.hashes = content.split("\n")
+        self.hashes = {hash_s: False for hash_s in content.split("\n")}
 
     def save_to_file(self, file_path: str):
-        create_file(file_path, "\n".join(self.hashes))
+        overwrite_file(file_path, "\n".join([hash_s for hash_s in self.hashes if self.hashes[hash_s]]))
 
     def add_last_to_file(self, file_path: str):
         add_content_to_file(file_path, self.hashes[-1] + "\n")

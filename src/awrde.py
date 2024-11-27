@@ -67,6 +67,8 @@ class Awrde:
 
             print(f"Processed {file}")
 
+        hashed_files.save_to_file(hash_path)
+
     def process_file(self, file: str):
         self.simulate_file(file)
 

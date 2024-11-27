@@ -20,6 +20,9 @@ def read_file(file_path: str) -> str:
     with codecs.open(file_path, "r", "utf-8") as file:
         return file.read()
 
+def overwrite_file(file_path: str, content: str):
+    with codecs.open(file_path, "w", "utf-8") as file:
+        file.write(content)
 
 def add_content_to_file(file_path: str, content: str):
     with codecs.open(file_path, "a", "utf-8") as file:
