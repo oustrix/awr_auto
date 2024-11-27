@@ -47,11 +47,10 @@ class Awrde:
         hash_path = os.path.join(self.input_dir, "hashes.txt")
         try:
             hashed_files.read_from_file(hash_path)
+            print(f"Opened hashes file: {hash_path}")
         except FileNotFoundError:
             print("Hashes file not found")
             create_file(hash_path, "")
-
-        print(f"Opened hashes file: {hash_path}")
 
         for file in files:
             file_hash = hashlib.sha256(open(file, "rb").read()).hexdigest()
