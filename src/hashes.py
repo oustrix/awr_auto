@@ -11,7 +11,7 @@ class Hash:
         if hash_s in self.hashes:
             self.hashes[hash_s] = True
 
-        return self.hashes[hash_s]
+        return hash_s in self.hashes
 
     def add(self, hash_s: str):
         if not self.contains(hash_s):
@@ -22,7 +22,12 @@ class Hash:
         self.hashes = {hash_s: False for hash_s in content.split("\n")}
 
     def save_to_file(self, file_path: str):
-        overwrite_file(file_path, "\n".join([hash_s for hash_s in self.hashes if self.hashes[hash_s]]))
+        overwrite_file(
+            file_path,
+            "\n".join([hash_s for hash_s in self.hashes if self.hashes[hash_s]]),
+        )
 
-    def add_last_to_file(self, file_path: str):
-        add_content_to_file(file_path, self.hashes[-1] + "\n")
+    def add_to_file(self, file_path: str, hash_s: str):
+        add_content_to_file(file_path, hash_s)
+        if not self.contains(hash_s):
+            self.hashes[hash_s] = True

@@ -63,7 +63,7 @@ class Awrde:
             self.process_file(file)
 
             hashed_files.add(file_hash)
-            hashed_files.add_last_to_file(hash_path)
+            hashed_files.add_to_file(hash_path, file_hash)
 
             print(f"Processed {file}")
 
