@@ -13,7 +13,6 @@ from src.files import (
     create_directory,
     create_file,
     add_content_to_file,
-    read_file,
 )
 from src.hashes import Hash
 from src.settings import settings

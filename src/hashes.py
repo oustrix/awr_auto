@@ -1,5 +1,3 @@
-from typing import List
-
 from src.files import read_file, add_content_to_file, overwrite_file
 
 
