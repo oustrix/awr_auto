@@ -1,3 +1,4 @@
+altgraph==0.17.4
 annotated-types==0.7.0
 black==24.10.0
 click==8.1.7
@@ -10,9 +11,12 @@ kiwisolver==1.4.7
 matplotlib==3.9.2
 mutagen==1.47.0
 mypy-extensions==1.0.0
+Nuitka==2.5.4
 numpy==2.1.2
+ordered-set==4.1.0
 packaging==24.1
 pathspec==0.12.1
+pefile==2023.2.7
 pillow==10.4.0
 platformdirs==4.3.6
 pyawr==24.1.1
@@ -20,10 +24,15 @@ pyawr-utils==1.0
 pydantic==2.9.2
 pydantic-settings==2.6.1
 pydantic_core==2.23.4
+pyinstaller==6.11.1
+pyinstaller-hooks-contrib==2024.10
 pyparsing==3.1.4
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 pywin32==307
+pywin32-ctypes==0.2.3
 pywinauto==0.6.8
 six==1.16.0
+transliterate==1.10.2
 typing_extensions==4.12.2
+zstandard==0.23.0

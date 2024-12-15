@@ -9,3 +9,6 @@ freeze:
 
 lint:
 	black .
+
+build:
+	pyinstaller start.py

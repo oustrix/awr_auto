@@ -4,6 +4,7 @@ import codecs
 import glob
 from typing import List
 
+import transliterate
 
 def create_file(file_path: str, content: str = "") -> str:
     """
@@ -39,5 +40,16 @@ def create_directory(path: str) -> str:
 
 
 def get_emp_files_in_directory(directory_path: str) -> List[str]:
-    emp_files = glob.glob(os.path.join(directory_path, "*.emp"))
+    emp_files = glob.glob(os.path.join(directory_path, "*.emp"), recursive=True)
     return emp_files
+
+def get_cst_files_in_directory(directory_path: str) -> List[str]:
+    cst_files = glob.glob(os.path.join(directory_path, "*.cst"), recursive=True)
+    return cst_files
+
+def transliterate_filename(filename):
+    name, extension = os.path.splitext(filename)
+
+    transliterated_name = transliterate.translit(name, reversed=True)
+
+    return transliterated_name + extension
